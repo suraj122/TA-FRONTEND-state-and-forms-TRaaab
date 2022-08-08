@@ -4,56 +4,37 @@ class Images extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      img: "/images/basketball.jpg",
+      active: "basketball",
     };
   }
 
-  handleBasketball = () => {
+  handleActive = (lable) => {
     this.setState({
-      img: "/images/basketball.jpg",
-    });
-  };
-
-  handlePubg = () => {
-    this.setState({
-      img: "/images/pubg.jpeg",
-    });
-  };
-
-  handleTiger = () => {
-    this.setState({
-      img: "/images/tiger.jpg",
-    });
-  };
-
-  handlePhone = () => {
-    this.setState({
-      img: "/images/phone.jpg",
-    });
-  };
-  handleLaptop = () => {
-    this.setState({
-      img: "/images/laptop.jpg",
-    });
-  };
-
-  handleCricket = () => {
-    this.setState({
-      img: "/images/cricket.jpg",
+      active: lable,
     });
   };
 
   render() {
+    let lables = ["basketball", "pubg", "tiger", "phone", "laptop", "cricket"];
     return (
       <div className="text-center">
-        <button onClick={this.handleBasketball}>Basketball</button>
-        <button onClick={this.handlePubg}>PubG</button>
-        <button onClick={this.handleTiger}>Tiger</button>
-        <button onClick={this.handlePhone}>Phone</button>
-        <button onClick={this.handleLaptop}>Laptop</button>
-        <button onClick={this.handleCricket}>Cricket</button>
+        <div>
+          {lables.map((lable) => (
+            <button
+              className={this.state.active === lable ? "active" : ""}
+              key={lable}
+              onClick={() => {
+                this.setState({
+                  active: lable,
+                });
+              }}
+            >
+              {lable}
+            </button>
+          ))}
+        </div>
         <figure>
-          <img src={this.state.img} width="600" alt="" />
+          <img src={`/images/${this.state.active}.jpg`} width="600" alt="" />
         </figure>
       </div>
     );
