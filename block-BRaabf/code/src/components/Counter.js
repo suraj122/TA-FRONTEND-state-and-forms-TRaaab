@@ -20,7 +20,7 @@ class Counter extends React.Component {
     });
   };
   handleInc = () => {
-    if (this.state.counter < this.state.max) {
+    if (this.state.counter + this.state.step < this.state.max) {
       if (this.state.step === 5) {
         this.setState({
           counter: this.state.counter + 5,
