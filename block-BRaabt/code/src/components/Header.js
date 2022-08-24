@@ -5,12 +5,14 @@ class Header extends React.Component {
     super(props);
     this.state = {
       activeIndex: -1,
+      isVisible: false,
     };
   }
 
   handleClick = (i) => {
     this.setState({
       activeIndex: i,
+      isVisible: !this.state.isVisible,
     });
   };
   handleCross = () => {
@@ -25,7 +27,7 @@ class Header extends React.Component {
         return (
           <>
             <button className="default">Defatult Notification</button>
-            <span onClick={this.handleCross}>cross</span>
+            <span onClick={this.handleCross}>x</span>
           </>
         );
 
@@ -33,7 +35,7 @@ class Header extends React.Component {
         return (
           <>
             <button className="success">Success Notification</button>
-            <span onClick={this.handleCross}>cross</span>
+            <span onClick={this.handleCross}>x</span>
           </>
         );
 
@@ -49,7 +51,7 @@ class Header extends React.Component {
         return (
           <>
             <button className="warning">Warning Notification</button>
-            <span onClick={this.handleCross}>cross</span>
+            <span onClick={this.handleCross}>x</span>
           </>
         );
 
@@ -57,7 +59,7 @@ class Header extends React.Component {
         return (
           <>
             <button className="info">Infor Notification</button>
-            <span onClick={this.handleCross}>cross</span>
+            <span onClick={this.handleCross}>x</span>
           </>
         );
 
