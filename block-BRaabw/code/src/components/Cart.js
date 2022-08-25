@@ -5,6 +5,7 @@ class Cart extends React.Component {
     super(props);
     this.state = {
       isVisible: false,
+      quantity: 1,
     };
   }
   handleClick = () => {
@@ -12,7 +13,24 @@ class Cart extends React.Component {
       isVisible: !this.state.isVisible,
     });
   };
+
+  handleIncrease = () => {
+    this.setState({
+      quantity: this.state.quantity + 1,
+    });
+  };
+  handleDecrease = () => {
+    this.state.quantity === 0
+      ? this.setState({
+          quantity: 0,
+        })
+      : this.setState({
+          quantity: this.state.quantity - 1,
+        });
+  };
+
   render() {
+    console.log(this.props.cart);
     return (
       <aside className="cart">
         <header onClick={this.handleClick} className="cart-header">
@@ -29,6 +47,23 @@ class Cart extends React.Component {
               <span>0</span>
               <h3>Cart</h3>
             </header>
+            <ul>
+              {this.props.cart.map((item, i) => (
+                <li>
+                  <img src={`/images/products/${item.sku}_2.jpg`} alt="" />
+                  <h5>{item.title}</h5>
+                  <span>Print Quantity: 1</span>
+                  <strong>${item.price}</strong>
+                  <button onClick={this.handleIncrease}>+</button>
+                  <button onClick={this.handleDecrease}>-</button>
+                  <strong onClick={() => this.props.delete(i)}>X</strong>
+                </li>
+              ))}
+            </ul>
+            <footer>
+              <h5>Subtotoal</h5>
+              {this.props.cart.reduce((acc, cv) => acc + cv.price, 0)}
+            </footer>
           </div>
         ) : (
           ""

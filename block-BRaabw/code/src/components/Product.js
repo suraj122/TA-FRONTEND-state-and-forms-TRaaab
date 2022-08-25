@@ -22,7 +22,9 @@ function Product(props) {
             <h4>{product.title}</h4>
             <strong>${product.price}</strong>
             <div>
-              <button>Add to Cart</button>
+              <button onClick={() => props.addItem(product)}>
+                Add to Cart
+              </button>
             </div>
           </li>
         ))}
