@@ -12,6 +12,7 @@ class App extends React.Component {
       ascending: false,
       descending: false,
       size: "",
+      cart: [],
     };
   }
   handleChange = (event) => {
@@ -34,6 +35,20 @@ class App extends React.Component {
     });
   };
 
+  handleClick = (product) => {
+    let cart = this.state.cart;
+    this.setState(() => {
+      return cart.push(product);
+    });
+  };
+
+  handleDelete = (i) => {
+    let cart = this.state.cart;
+    this.setState(() => {
+      return cart.splice(i, 1);
+    });
+  };
+
   render() {
     let sizes = [...new Set(data.map((item) => item.availableSizes).flat())];
     return (
@@ -41,8 +56,13 @@ class App extends React.Component {
         <Header total={data.length} sort={this.handleChange} />
         <main className="flex">
           <Sizes sizes={sizes} filter={this.handleFilter} />
-          <Product data={data} sort={this.state} filter={this.state} />
-          <Cart />
+          <Product
+            addItem={this.handleClick}
+            data={data}
+            sort={this.state}
+            filter={this.state}
+          />
+          <Cart delete={this.handleDelete} cart={this.state.cart} />
         </main>
       </>
     );
